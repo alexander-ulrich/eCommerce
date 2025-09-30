@@ -13,17 +13,23 @@ export default function Home() {
   } = useOutletContext();
   //   console.log(products);
   console.log(cartItems);
+  console.log(products + " from HOME");
+  //   setProducts(JSON.parse(localStorage.getItem("products")));
 
   return (
     <div className="flex flex-col items-center mx-20">
       <Categories setCategory={setCategory} />
-      <ProductList
-        category={category}
-        products={products}
-        setProducts={setProducts}
-        cartItems={cartItems}
-        setCartItems={setCartItems}
-      />
+      {products ? (
+        <ProductList
+          category={category}
+          //   products={products}
+          setProducts={setProducts}
+          cartItems={cartItems}
+          setCartItems={setCartItems}
+        />
+      ) : (
+        <div />
+      )}
     </div>
   );
 }

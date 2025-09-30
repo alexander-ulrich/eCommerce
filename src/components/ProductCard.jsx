@@ -77,14 +77,14 @@ export default function ProductCard({
       </figure>
       <div className="card-body">
         <h2 className="card-title">{product.title}</h2>
-        <p>{product.description}</p>
+        {/* <p>{product.description}</p> */}
+        <p className="my-5">{product.category}</p>
         <p className="text-right">
           {new Intl.NumberFormat("de-DE", {
             style: "currency",
             currency: "EUR",
           }).format(product.price)}
         </p>
-        <p className="my-5">{product.category}</p>
         <div className="card-actions justify-end my-5">
           {!cartItems.some((el) => el.id === product.id) ? (
             <button onClick={addToCart} className="btn btn-primary">

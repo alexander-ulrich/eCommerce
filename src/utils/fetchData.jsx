@@ -2,7 +2,7 @@ import { useOutletContext } from "react-router";
 
 export default async function fetchStoreData() {
   try {
-    let data = JSON.parse(localStorage.getItem("products")) ?? [];
+    let data = (await JSON.parse(localStorage.getItem("products"))) ?? [];
 
     if (data.length === 0) {
       const res = await fetch("https://fakestoreapi.com/products");
@@ -18,7 +18,3 @@ export default async function fetchStoreData() {
     return { error: error.message };
   }
 }
-
-// export function getLocalStorage(key) {
-//   return JSON.parse(localStorage.getItem(key)) ?? [];
-// }
