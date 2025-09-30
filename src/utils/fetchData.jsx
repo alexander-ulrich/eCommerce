@@ -1,3 +1,5 @@
+import { useOutletContext } from "react-router";
+
 export default async function fetchStoreData() {
   try {
     let data = JSON.parse(localStorage.getItem("products")) ?? [];

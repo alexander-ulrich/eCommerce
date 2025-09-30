@@ -12,20 +12,22 @@ export default function ProductList({
 }) {
   //   const products = JSON.parse(localStorage.getItem("products")) ?? [];
   console.log("Cart in ProductList: " + cartItems);
+  console.log("Productlist: " + products);
 
-  const filteredProducts = category
-    ? products?.filter((item) => {
-        console.log("item: " + item.category, "cat: " + category);
+  const filteredProducts =
+    products && category
+      ? products?.filter((item) => {
+          console.log("item: " + item.category, "cat: " + category);
 
-        if (item.category === category) return item;
-      })
-    : products;
+          if (item.category === category) return item;
+        })
+      : products;
   console.log(filteredProducts);
 
   return (
-    <div className="flex flex-wrap gap-10 justify-around">
+    <div className="flex flex-wrap gap-10 justify-around px-20">
       {filteredProducts &&
-        filteredProducts?.map((product) => (
+        filteredProducts.map((product) => (
           <ProductCard
             key={product.id}
             product={product}
