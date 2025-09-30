@@ -1,6 +1,6 @@
 import { Outlet } from "react-router";
 import Footer from "../components/Footer";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import fetchStoreData from "../utils/fetchData";
 import Navbar from "../components/Navbar";
 
@@ -8,6 +8,7 @@ export default function MainLayout() {
   const [products, setProducts] = useState(
     // fetchStoreData() ?? []
     JSON.parse(localStorage.getItem("products")) ?? fetchStoreData()
+    // JSON.parse(localStorage.getItem("products")) ?? []
   );
   const [category, setCategory] = useState(null);
   const [cartItems, setCartItems] = useState(
@@ -16,9 +17,31 @@ export default function MainLayout() {
 
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
-  useEffect(() => {
-    fetchStoreData();
-  }, []);
+  //   useEffect(() => {
+  //     // fetchStoreData();
+  //     async function fetchData() {
+  //       try {
+
+  //         const res = await fetch("https://fakestoreapi.com/products");
+  //         if (!res.ok)
+  //           throw new Error("Something went wrong fetching Data, try again!");
+
+  //         const data = await res.json();
+  //         console.log(data);
+
+  //         // setProducts(data);
+  //         // localStorage.setItem("products", JSON.stringify(data));
+  //         // }
+
+  //         return data;
+  //       } catch (error) {
+  //         // return { error: error.message };
+  //       }
+  //     }
+  //     // fetchData();
+  //     // setProducts(JSON.parse(localStorage.getItem("products")));
+  //     // setProducts(JSON.parse(localStorage.getItem("products")) ?? []);
+  //   }, []);
   useEffect(() => {
     let amount = 0;
     let sum = 0;

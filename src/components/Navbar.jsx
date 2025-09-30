@@ -8,23 +8,9 @@ export default function Navbar({
   totalAmount,
 }) {
   const cartItems = JSON.parse(localStorage.getItem("cart")) ?? [];
-  //   const [sum, setSum] = useState(0);
+
   console.log("From Navbar: " + cartItems[0]);
-  //   let sum = 0;
-  //   cartItems.map(
-  //     (i) => {
-  //       console.log(
-  //         "itemPrice: " + i.price,
-  //         "itemAmount: " + i.amount,
-  //         "total: " + i.price * i.amount
-  //       );
-  //       sum += i.price * i.amount;
-  //       // setSum((prev) => prev + i.price * i.amount);
-  //     }
-  //     //   useEffect(() => {});
-  //     // },
-  //     // [cartItems]
-  //   );
+
   console.log("TOTAL: " + totalPrice);
 
   function handleClick() {
@@ -33,8 +19,8 @@ export default function Navbar({
   }
 
   return (
-    <div className="navbar bg-base-100 shadow-sm px-20">
-      <div className="flex-1">
+    <div className="navbar sticky top-0 z-1 bg-base-100 shadow-sm px-20">
+      <div className="flex-1 ">
         <NavLink
           to="/"
           onMouseDown={handleClick}

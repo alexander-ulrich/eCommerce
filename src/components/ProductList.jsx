@@ -4,13 +4,13 @@ import fetchStoreData from "../utils/fetchData";
 
 export default function ProductList({
   category,
-  products,
+  //   products,
   setProducts,
   cartItems,
   setCartItems,
   setCategory,
 }) {
-  //   const products = JSON.parse(localStorage.getItem("products")) ?? [];
+  const products = JSON.parse(localStorage.getItem("products")) ?? [];
   console.log("Cart in ProductList: " + cartItems);
   console.log("Productlist: " + products);
 
@@ -25,7 +25,7 @@ export default function ProductList({
   console.log(filteredProducts);
 
   return (
-    <div className="flex flex-wrap gap-10 justify-around px-20">
+    <div className="grid grid-cols 1 md:grid-cols-2 lg:grid-cols-4 gap-10 justify-around">
       {filteredProducts &&
         filteredProducts.map((product) => (
           <ProductCard
