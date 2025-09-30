@@ -55,7 +55,7 @@ export default function CartList({ cartItems, setCartItems, totalPrice }) {
   }
 
   return (
-    <ul className="list bg-base-100 rounded-box shadow-md">
+    <ul className="list bg-base-100 rounded-box shadow-md px-20">
       <li className="p-4 pb-2 text-xs opacity-60 tracking-wide">
         Your Shopping Cart
       </li>
@@ -97,7 +97,7 @@ export default function CartList({ cartItems, setCartItems, totalPrice }) {
           );
         })}
       {cartItems && (
-        <li className="flex gap-15 justify-end p-4 pb-2 text-lg text-right opacity-60 tracking-wide mr-5">
+        <li className="flex gap-15 justify-end p-4 pb-2 text-lg text-right opacity-60 tracking-wide mr-5 my-5">
           <span>
             Total Cost:{" "}
             {new Intl.NumberFormat("de-DE", {
