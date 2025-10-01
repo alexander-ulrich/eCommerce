@@ -1,15 +1,10 @@
 import { Outlet } from "react-router";
 import Footer from "../components/Footer";
 import { useEffect, useLayoutEffect, useState } from "react";
-import fetchStoreData from "../utils/fetchData";
+import fetchStoreData, { fetchStoreData2 } from "../utils/fetchData";
 import Navbar from "../components/Navbar";
 
 export default function MainLayout() {
-  const [products, setProducts] = useState(
-    // fetchStoreData() ?? []
-    JSON.parse(localStorage.getItem("products")) ?? fetchStoreData()
-    // JSON.parse(localStorage.getItem("products")) ?? []
-  );
   const [category, setCategory] = useState(null);
   const [cartItems, setCartItems] = useState(
     JSON.parse(localStorage.getItem("cart")) ?? []
@@ -17,49 +12,25 @@ export default function MainLayout() {
 
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
-  //   useEffect(() => {
-  //     // fetchStoreData();
-  //     async function fetchData() {
-  //       try {
 
-  //         const res = await fetch("https://fakestoreapi.com/products");
-  //         if (!res.ok)
-  //           throw new Error("Something went wrong fetching Data, try again!");
+  const url = "https://fakestoreapi.com/products";
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    fetchStoreData(url, setProducts);
+  }, []);
 
-  //         const data = await res.json();
-  //         console.log(data);
-
-  //         // setProducts(data);
-  //         // localStorage.setItem("products", JSON.stringify(data));
-  //         // }
-
-  //         return data;
-  //       } catch (error) {
-  //         // return { error: error.message };
-  //       }
-  //     }
-  //     // fetchData();
-  //     // setProducts(JSON.parse(localStorage.getItem("products")));
-  //     // setProducts(JSON.parse(localStorage.getItem("products")) ?? []);
-  //   }, []);
   useEffect(() => {
     let amount = 0;
     let sum = 0;
-    cartItems.map(
-      (i) => {
-        console.log(
-          "itemPrice: " + i.price,
-          "itemAmount: " + i.amount,
-          "total: " + i.price * i.amount
-        );
-        sum += i.price * i.amount;
-        amount += i.amount;
-        // setSum((prev) => prev + i.price * i.amount);
-      }
-      //   useEffect(() => {});
-      // },
-      // [cartItems]
-    );
+    cartItems.map((i) => {
+      console.log(
+        "itemPrice: " + i.price,
+        "itemAmount: " + i.amount,
+        "total: " + i.price * i.amount
+      );
+      sum += i.price * i.amount;
+      amount += i.amount;
+    });
     setTotalPrice(sum);
     setTotalAmount(amount);
     console.log("saved Cart to Local Storage");

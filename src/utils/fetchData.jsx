@@ -1,20 +1,34 @@
 import { useOutletContext } from "react-router";
 
-export default async function fetchStoreData() {
+export default async function fetchStoreData(url, setData) {
   try {
-    let data = (await JSON.parse(localStorage.getItem("products"))) ?? [];
+    const res = await fetch(url);
 
-    if (data.length === 0) {
-      const res = await fetch("https://fakestoreapi.com/products");
-      if (!res.ok)
-        throw new Error("Something went wrong fetching Data, try again!");
+    if (!res.ok)
+      throw new Error("Something went wrong fetching Data, try again!");
 
-      data = await res.json();
+    const data = await res.json();
+    console.log("Data from useEffect:" + data);
+    localStorage.setItem("products", JSON.stringify(data));
+    setData(data);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
 
-      localStorage.setItem("products", JSON.stringify(data));
-    }
+export async function fetchStoreData2() {
+  try {
+    const res = await fetch("https://fakestoreapi.com/products");
+
+    if (!res.ok)
+      throw new Error("Something went wrong fetching Data, try again!");
+
+    const data = await res.json();
+    console.log("Data from useEffect:" + data);
+    localStorage.setItem("products", JSON.stringify(data));
+
     return data;
   } catch (error) {
-    return { error: error.message };
+    console.log(error.message);
   }
 }
